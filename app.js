@@ -92,8 +92,7 @@ app.get("/user", auth, async (req, res) => {
         if (user) {
             res.status(200).send({
                 sucess: true,
-                data: user,
-
+                data: user
             })
         } else res.status(404).send("USER NOT FOUND")
     }
@@ -104,20 +103,12 @@ app.get("/user", auth, async (req, res) => {
     }
 }
 )
-
-
 app.get("/user/:id", async (req, res) => {
     console.log(req.params.id)
 
     const user = await data.findOne({ _id: req.params.id })
     if (user) {
-        //   const token = jwt.sign(
-        //     { id: user._id },
-        //     'keyy',
-        //     {
-        //       expiresIn: "28d",
-        //     }
-        //   );
+    
         res.status(200).json({ user });
     } else {
         return res.status(404).send("user not found")
@@ -225,7 +216,6 @@ app.get('/users', async (req, res) => {
     }
 })
 
-
 app.put("/updateuser", auth, async (req, res) => {
     try {
         let token = req.headers['xtoken']
@@ -261,12 +251,7 @@ app.put("/updatestatus/:id", async (req, res) => {
     try {
         const getuser = await data.findOne({ _id: req.params.id });
         console.log('user', getuser);
-
         console.log('req.body', req.body)
-
-
-
-
         const updatestatus = await data.updateOne({ _id: req.params.id }, {
             $set: { activeStatus: parseInt(req.body.x) }
         }, { new: true })
@@ -348,8 +333,6 @@ app.post("/login", async (req, res) => {
         console.log(err);
     }
 });
-
-
 
 // app.put("/updatestatus", auth, async (req, res) => {
 //     try {
