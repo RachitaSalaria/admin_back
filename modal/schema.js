@@ -18,16 +18,19 @@ const dataschema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    mobile   : {
+    mobile: {
         type: Number,
         required: true,
     },
     password: {
         type: String,
         required: true,
-      
+    },
+    activeStatus: {
+        type: Number,
+        default: 2
     }
-  
+
 })
 
 

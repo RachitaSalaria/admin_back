@@ -108,7 +108,7 @@ app.get("/user/:id", async (req, res) => {
 
     const user = await data.findOne({ _id: req.params.id })
     if (user) {
-    
+
         res.status(200).json({ user });
     } else {
         return res.status(404).send("user not found")
@@ -250,16 +250,23 @@ app.put("/updatestatus/:id", async (req, res) => {
     // console.log(req.body.);
     try {
         const getuser = await data.findOne({ _id: req.params.id });
-        console.log('user', getuser);
-        console.log('req.body', req.body)
-        const updatestatus = await data.updateOne({ _id: req.params.id }, {
-            $set: { activeStatus: parseInt(req.body.x) }
-        }, { new: true })
-        if (updatestatus) {
-            res.status(200).json("status is updated")
-        }
-        else {
-            return res.status(404).send("status is not updated")
+        console.log('user', getuser)
+        console.log('req.body', req.body);
+
+        
+        if (getuser) {
+            const updatestatus = await data.updateOne({ _id: req.params.id }, {
+
+                $set: { activeStatus: parseInt(req.body.x) }
+            }, { new: true })
+            if (updatestatus) {
+                res.status(200).json("status is updated")
+            }
+            else {
+                return res.status(404).send("status is not updated")
+            }
+        } else {
+            return res.status(404).send("something went wrong")
         }
     } catch (err) {
         res.status(400).send(err)
