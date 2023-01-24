@@ -16,35 +16,35 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-// app.post("/register", async (req, res) => {
-//     // console.log(req.file)
-//     try {
-//         const body = req.body;
-//         // console.log(body)
+app.post("/register", async (req, res) => {
+    // console.log(req.file)
+    try {
+        const body = req.body;
+        // console.log(body)
 
-//         if (!(body.firstName && body.lastName && body.email && body.mobile && body.password)) {
-//             return res.status(400).send("ALL FIELD  IS REQUIRED")
-//         }
-//         const existuser = await data.findOne({ mobile: body.mobile });
-//         if (existuser) {
-//             return res.status(409).json({ status: false, error: "USER ALREADY REGISTER", data: [] })
-//         }
-//         const salt = await bcrypt.genSalt(10);
-//         HashPassword = await bcrypt.hash(body.password, salt);
-//         const user = await data.create({
-//             firstName: body.firstName,
-//             lastName: body.lastName,
-//             email: body.email.toLowerCase(),
-//             mobile: body.mobile,
-//             password: HashPassword,
-//         });
-//         console.log("user", user)
-//         return res.status(200).json({ "status": true, "message": "sucess", data: user })
-//     } catch (err) {
-//         console.log(err)
-//     }
-// }
-// )
+        if (!(body.firstName && body.lastName && body.email && body.mobile && body.password)) {
+            return res.status(400).send("ALL FIELD  IS REQUIRED")
+        }
+        const existuser = await data.findOne({ mobile: body.mobile });
+        if (existuser) {
+            return res.status(409).json({ status: false, error: "USER ALREADY REGISTER", data: [] })
+        }
+        const salt = await bcrypt.genSalt(10);
+        HashPassword = await bcrypt.hash(body.password, salt);
+        const user = await data.create({
+            firstName: body.firstName,
+            lastName: body.lastName,
+            email: body.email.toLowerCase(),
+            mobile: body.mobile,
+            password: HashPassword,
+        });
+        console.log("user", user)
+        return res.status(200).json({ "status": true, "message": "sucess", data: user })
+    } catch (err) {
+        console.log(err)
+    }
+}
+)
 
 // app.post("/login", async (req, res) => {
 //     try {
@@ -122,7 +122,7 @@ app.get("/alldata", async (req, res) => {
 })
 
 
-app.delete("/deleteuser/:id", async (req, res) => {
+app.delete("/deleteuser/:id",auth, async (req, res) => {
     console.log('deeded')
     const id = req.params.id;
     console.log('id', id)
@@ -144,7 +144,7 @@ app.delete("/deleteuser/:id", async (req, res) => {
 
 })
 
-app.put("/updateuser/:id", async (req, res) => {
+app.put("/updateuser/:id", auth, async (req, res) => {
     const id = req.params.id;
     console.log('id', id)
     try {
@@ -244,7 +244,7 @@ app.put("/updateuser", auth, async (req, res) => {
     }
 })
 
-app.put("/updatestatus/:id", async (req, res) => {
+app.put("/updatestatus/:id",auth, async (req, res) => {
     const id = req.params.id;
     // console.log('id', id)
     // console.log(req.body.);
@@ -274,35 +274,35 @@ app.put("/updatestatus/:id", async (req, res) => {
     }
 })
 
-app.post("/register", async (req, res) => {
-    // console.log(req.file)
-    try {
-        const body = req.body;
-        // console.log(body)
+// app.post("/register", async (req, res) => {
+//     // console.log(req.file)
+//     try {
+//         const body = req.body;
+//         // console.log(body)
 
-        if (!(body.firstName && body.lastName && body.email && body.mobile && body.password)) {
-            return res.status(400).send("ALL FIELD  IS REQUIRED")
-        }
-        const existuser = await admin.findOne({ mobile: body.mobile });
-        if (existuser) {
-            return res.status(409).json({ status: false, error: "USER ALREADY REGISTER", data: [] })
-        }
-        const salt = await bcrypt.genSalt(10);
-        HashPassword = await bcrypt.hash(body.password, salt);
-        const user = await admin.create({
-            firstName: body.firstName,
-            lastName: body.lastName,
-            email: body.email.toLowerCase(),
-            mobile: body.mobile,
-            password: HashPassword,
-        });
-        console.log("user", user)
-        return res.status(200).json({ "status": true, "message": "sucess", data: user })
-    } catch (err) {
-        console.log(err)
-    }
-}
-)
+//         if (!(body.firstName && body.lastName && body.email && body.mobile && body.password)) {
+//             return res.status(400).send("ALL FIELD  IS REQUIRED")
+//         }
+//         const existuser = await admin.findOne({ mobile: body.mobile });
+//         if (existuser) {
+//             return res.status(409).json({ status: false, error: "USER ALREADY REGISTER", data: [] })
+//         }
+//         const salt = await bcrypt.genSalt(10);
+//         HashPassword = await bcrypt.hash(body.password, salt);
+//         const user = await admin.create({
+//             firstName: body.firstName,
+//             lastName: body.lastName,
+//             email: body.email.toLowerCase(),
+//             mobile: body.mobile,
+//             password: HashPassword,
+//         });
+//         console.log("user", user)
+//         return res.status(200).json({ "status": true, "message": "sucess", data: user })
+//     } catch (err) {
+//         console.log(err)
+//     }
+// }
+// )
 
 app.post("/login", async (req, res) => {
     try {
